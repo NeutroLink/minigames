@@ -17,7 +17,7 @@
       padding-block: $size-4;
     }
 
-    @media (width <= 480px) {
+    @include up-to('mobile-large') {
       grid-template-columns: 1fr;
     }
   }
