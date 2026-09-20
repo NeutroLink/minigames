@@ -1,0 +1,145 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.header {
+  background-color: $color-bg;
+
+  // Figma desktop header: 1920x85, 80px side inset, 24px vertical padding.
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $size-2;
+    padding-block: $size-3;
+
+    @include from('desktop') {
+      padding-inline: $size-10;
+    }
+
+    @include up-to('tablet') {
+      padding-block: $size-1;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: $size-1;
+    color: $color-on-primary;
+    font-size: $font-size-headline-small;
+    font-weight: $font-weight-extra-bold;
+    text-decoration: none;
+  }
+
+  &__nav {
+    @include up-to('tablet') {
+      display: none;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: $size-3;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include from('desktop') {
+      gap: $size-5;
+    }
+  }
+
+  &__link {
+    color: $color-on-bg;
+    font-size: $font-size-body-medium;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-on-primary;
+    }
+
+    &[aria-current='page'] {
+      color: $color-on-primary;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $size-2;
+
+    @include up-to('tablet') {
+      display: none;
+    }
+  }
+
+  &__burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: $button-padding-icon;
+    border: 0;
+    border-radius: $corner-small;
+    background-color: transparent;
+    color: $color-on-primary;
+    font-family: inherit;
+    font-size: $font-size-body-medium;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+
+    @include up-to('tablet') {
+      display: inline-flex;
+    }
+  }
+}
+
+.button {
+  padding: $button-padding-medium;
+  border: 1px solid transparent;
+  border-radius: $corner-small;
+  font-family: inherit;
+  font-size: $font-size-body-medium;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &--outlined {
+    border-color: $color-on-primary;
+    background-color: transparent;
+    color: $color-on-primary;
+
+    &:hover {
+      background-color: $color-surface;
+    }
+
+    &:active {
+      background-color: $color-secondary;
+    }
+  }
+
+  &--primary {
+    background-color: $color-primary;
+    color: $color-on-primary;
+
+    &:hover {
+      background-color: $color-primary-high;
+    }
+
+    &:active {
+      background-color: $color-primary-low;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

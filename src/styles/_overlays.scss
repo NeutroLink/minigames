@@ -1,0 +1,359 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.footer {
+  background-color: $color-bg-footer;
+  color: $color-on-bg-footer;
+
+  &__top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: $size-8;
+    padding-block: $size-5;
+
+    @include up-to('tablet') {
+      grid-template-columns: 1fr 1fr;
+      gap: $size-3;
+      padding-block: $size-4;
+    }
+
+    @include up-to('mobile-large') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__logo {
+    margin: 0 0 $size-2;
+    color: $color-white;
+    font-size: $font-size-headline-small;
+    font-weight: $font-weight-extra-bold;
+  }
+
+  &__about {
+    margin: 0;
+    max-width: $size-15 * 4;
+    font-size: $font-size-body-small;
+  }
+
+  &__heading {
+    margin: 0 0 $size-2;
+    color: $color-white;
+    font-size: $font-size-label-extra-large;
+    font-weight: $font-weight-bold;
+  }
+
+  &__list {
+    display: grid;
+    gap: $size-1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    color: $color-on-bg-footer;
+    font-size: $font-size-body-small;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    gap: $size-1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $size-5;
+    height: $size-5;
+    border-radius: $corner-full;
+    background-color: $color-bg-footer-low;
+    color: $color-on-bg-footer;
+    font-size: $font-size-body-small;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background-color: $color-bg-footer-lowest;
+      color: $color-primary;
+    }
+  }
+
+  &__badge-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $size-1;
+    color: $color-on-bg-footer;
+    font-size: $font-size-label-large;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $size-3;
+    height: $size-3;
+    padding-inline: $size-05;
+    border-radius: $corner-full;
+    background-color: $color-white;
+    color: $color-on-primary;
+    font-size: $font-size-label-small;
+    font-weight: $font-weight-bold;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: $size-2;
+    padding-block: $size-3;
+    border-top: 1px solid $color-bg-footer-low;
+  }
+
+  &__copyright {
+    margin: 0;
+    font-size: $font-size-label-large;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  background-color: $color-bg;
+  opacity: 0;
+  transform: translateX(100%);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.is-open {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: $size-4;
+    padding-block: $size-3;
+  }
+
+  &__close {
+    align-self: flex-end;
+    padding: $button-padding-icon;
+    border: 0;
+    background-color: transparent;
+    color: $color-on-primary;
+    font-size: $font-size-headline-medium;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  &__list {
+    display: grid;
+    gap: $size-3;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    color: $color-on-primary;
+    font-size: $font-size-headline-small;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+  }
+
+  &__actions {
+    display: grid;
+    gap: $size-2;
+  }
+}
+
+.auth {
+  width: 100%;
+  max-width: $size-15 * 3 + $size-8 - $size-05;
+  padding: 0;
+  border: 1px solid $color-outline;
+  border-radius: $corner-large;
+  background-color: $color-white;
+  opacity: 0;
+  transform: translateY($size-3) scale(0.98);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+
+  &.is-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  &::backdrop {
+    background-color: $color-overlay-soft;
+  }
+
+  &__inner {
+    position: relative;
+    padding: $size-4;
+  }
+
+  &__close {
+    position: absolute;
+    top: $size-2;
+    right: $size-2;
+    padding: $button-padding-icon;
+    border: 0;
+    background-color: transparent;
+    color: $color-on-primary;
+    font-size: $font-size-headline-small;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  &__tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $size-1;
+    margin-bottom: $size-3;
+    padding: $size-05;
+    border-radius: $corner-full;
+    background-color: $color-secondary;
+  }
+
+  &__tab {
+    padding: $button-padding-medium;
+    border: 0;
+    border-radius: $corner-full;
+    background-color: transparent;
+    color: $color-on-bg;
+    font-family: inherit;
+    font-size: $font-size-body-small;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &.is-active {
+      background-color: $color-primary;
+      color: $color-on-primary;
+    }
+  }
+
+  &__body {
+    opacity: 0;
+    transform: translateY($size-1);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+
+    &.is-entering {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__form {
+    display: grid;
+    gap: $size-2;
+  }
+
+  &__submit {
+    width: 100%;
+  }
+
+  &__hint {
+    margin: 0;
+    color: $color-on-bg-low;
+    font-size: $font-size-label-large;
+    text-align: center;
+  }
+
+  &__inline-link {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    color: $color-tertiary;
+    font: inherit;
+    font-weight: $font-weight-bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.field {
+  display: grid;
+  gap: $size-05;
+  margin: 0;
+
+  &__label {
+    color: $color-on-bg;
+    font-size: $font-size-label-large;
+    font-weight: $font-weight-medium;
+  }
+
+  &__input {
+    padding: $button-padding-medium;
+    border: 1px solid $color-outline;
+    border-radius: $corner-small;
+    background-color: $color-white;
+    color: $color-on-primary;
+    font-family: inherit;
+    font-size: $font-size-body-medium;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+
+    &:hover {
+      border-color: $color-outline-variant;
+    }
+
+    &:focus {
+      border-color: $color-on-primary;
+      background-color: $color-surface-low;
+      outline: none;
+    }
+
+    &:disabled {
+      background-color: $color-bg;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.is-locked {
+  overflow: hidden;
+}
+
+// Sliding and zooming panels are a common vestibular trigger, so honour the OS "reduce motion" setting.
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .auth,
+  .auth__body {
+    transition: none;
+  }
+}
