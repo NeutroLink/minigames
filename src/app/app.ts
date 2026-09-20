@@ -4,6 +4,10 @@ import { createHeader } from '../components/header';
 import { Router } from './router';
 import { routes } from './routes';
 
+// The burger menu and the auth dialog arrive in the next task; the header only
+// needs to render its controls for now.
+function noop(): void {}
+
 export function renderApp(root: HTMLElement): void {
   const chrome = createElement('div');
   const outlet = createElement('main');
@@ -12,10 +16,6 @@ export function renderApp(root: HTMLElement): void {
   const navigate = (target: string): void => {
     router.navigate(target);
   };
-
-  // The burger menu and the auth dialog arrive in the next task; the header only
-  // needs to render its controls for now.
-  const noop = (): void => {};
 
   const renderChrome = (path: string): void => {
     clearElement(chrome);
