@@ -31,6 +31,10 @@ $color-outline-variant: #d2d2d2;
 $color-error: #b3261e;
 $color-like: #ff4b4b;
 
+// colors: overlays (on-primary at reduced opacity)
+$color-overlay-strong: rgb(36 33 69 / 80%);
+$color-overlay-soft: rgb(36 33 69 / 60%);
+
 // typography: families
 $font-primary: 'Inter', sans-serif;
 $font-secondary: 'Roboto', sans-serif;
@@ -92,6 +96,9 @@ $button-padding-icon: 8px;
 $shadow-level-1: 4px 4px 0 $color-on-primary;
 $shadow-level-2: 6px 6px 0 $color-on-primary;
 $shadow-level-3: 8px 8px 0 $color-on-primary;
+
+// layout
+$content-max-width: 1920px;
 
 // breakpoints
 $breakpoints: (

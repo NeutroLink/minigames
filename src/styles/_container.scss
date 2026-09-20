@@ -1,0 +1,19 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// Measured from the Figma desktop frame: content sits 120px from each edge of the
+// 1920 frame; the header keeps a narrower 80px inset of its own.
+.container {
+  width: 100%;
+  max-width: $content-max-width;
+  margin-inline: auto;
+  padding-inline: $size-2;
+
+  @include from('tablet') {
+    padding-inline: $size-4;
+  }
+
+  @include from('desktop') {
+    padding-inline: $size-15;
+  }
+}
