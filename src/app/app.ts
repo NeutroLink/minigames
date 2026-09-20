@@ -20,7 +20,13 @@ export function renderApp(root: HTMLElement): void {
   const renderChrome = (path: string): void => {
     clearElement(chrome);
     chrome.append(
-      createHeader({ routes, currentPath: path, onNavigate: navigate, onAuth: noop, onBurger: noop }),
+      createHeader({
+        routes,
+        currentPath: path,
+        onNavigate: navigate,
+        onAuth: noop,
+        onBurger: noop,
+      }),
     );
 
     clearElement(footerHost);
