@@ -96,9 +96,26 @@ export function createMobileMenu(options: MobileMenuOptions): MobileMenu {
   function close(): void {
     removeEventListener('keydown', onKeyDown);
     element.classList.remove('is-open');
-    element.setAttribute('hidden', '');
     document.body.classList.remove('is-locked');
     opener?.focus();
+
+    // The task asks for an animated close, so the element stays in the flow until
+    // the slide-out transition has run.
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      element.setAttribute('hidden', '');
+
+      return;
+    }
+
+    element.addEventListener(
+      'transitionend',
+      () => {
+        if (!element.classList.contains('is-open')) {
+          element.setAttribute('hidden', '');
+        }
+      },
+      { once: true },
+    );
   }
 
   closeButton.addEventListener('click', close);
