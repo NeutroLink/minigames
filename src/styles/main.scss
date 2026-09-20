@@ -1,11 +1,17 @@
 @use 'tokens' as *;
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'container';
+@use 'header';
+@use 'sections';
+@use 'overlays';
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   background-color: $color-bg;
@@ -14,6 +20,7 @@ body {
   font-size: $font-size-body-medium;
   font-weight: $font-weight-regular;
 }
+
 img {
   display: block;
   max-width: 100%;

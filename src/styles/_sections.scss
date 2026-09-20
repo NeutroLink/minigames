@@ -1,0 +1,279 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// Figma desktop: every content section is 40px padded top and bottom, with a
+// 40px gap between its heading row and its content.
+.section {
+  padding-block: $size-5;
+
+  @include up-to('tablet') {
+    padding-block: $size-4;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $size-2;
+    margin-bottom: $size-5;
+  }
+
+  &__title {
+    margin: 0;
+    padding-left: $size-1;
+    border-left: $size-05 solid $color-primary;
+    color: $color-on-primary;
+    font-size: $font-size-headline-medium;
+    font-weight: $font-weight-bold;
+
+    @include up-to('tablet') {
+      font-size: $font-size-headline-small;
+    }
+  }
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: $size-15 * 4;
+
+  @include up-to('tablet') {
+    min-height: $size-15 * 3;
+  }
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__inner {
+    display: flex;
+    padding-block: $size-14;
+  }
+
+  &__card {
+    max-width: $size-15 * 4;
+    padding: $size-4;
+    border: 1px solid $color-on-primary;
+    border-radius: $corner-large;
+    background-color: $color-bg;
+    box-shadow: $shadow-level-2;
+  }
+
+  &__title {
+    margin: 0 0 $size-2;
+    color: $color-on-primary;
+    font-size: $font-size-display-medium;
+    font-weight: $font-weight-extra-bold;
+    line-height: 1.2;
+
+    @include up-to('tablet') {
+      font-size: $font-size-headline-large;
+    }
+  }
+
+  &__text {
+    margin: 0 0 $size-3;
+    color: $color-on-bg;
+    font-size: $font-size-body-medium;
+  }
+}
+
+.carousel {
+  &__viewport {
+    overflow: hidden;
+  }
+
+  &__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax($size-15 * 2 + $size-6, 1fr);
+    gap: $size-2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include up-to('tablet') {
+      grid-auto-columns: minmax($size-14 + $size-8, 1fr);
+    }
+  }
+
+  &__slide {
+    min-width: 0;
+    container-type: inline-size;
+  }
+
+  &__controls {
+    display: flex;
+    gap: $size-1;
+  }
+
+  &__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $size-4;
+    height: $size-4;
+    border: 1px solid $color-outline;
+    border-radius: $corner-full;
+    background-color: $color-white;
+    color: $color-on-primary;
+    font-size: $font-size-body-large;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $color-surface;
+    }
+  }
+}
+
+.game-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: $corner-medium;
+  background-color: $color-white;
+
+  &__image {
+    width: 100%;
+    height: $size-15 * 2;
+    object-fit: cover;
+
+    @include up-to('tablet') {
+      height: $size-15 + $size-6;
+    }
+  }
+
+  &__info {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: $size-1;
+    background-color: $color-overlay-strong;
+    color: $color-white;
+
+    @container (width < 288px) {
+      display: none;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    overflow: hidden;
+    font-size: $font-size-label-large;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__meta {
+    display: flex;
+    gap: $size-2;
+    font-size: $font-size-label-medium;
+  }
+
+  &__likes {
+    color: $color-like;
+  }
+}
+
+.leaderboard {
+  &__scroller {
+    overflow-x: auto;
+    border-radius: $corner-medium;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: $color-white;
+    font-size: $font-size-body-small;
+
+    th,
+    td {
+      padding: $size-2;
+      text-align: left;
+    }
+
+    thead th {
+      background-color: $color-tertiary;
+      color: $color-white;
+      font-size: $font-size-label-medium;
+      text-transform: uppercase;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: $color-bg;
+    }
+  }
+
+  &__rank {
+    color: $color-on-primary;
+    font-weight: $font-weight-bold;
+  }
+}
+
+.developer {
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: $size-4;
+
+    @include up-to('tablet') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    max-height: $size-15 * 3;
+    object-fit: cover;
+    border-radius: $corner-large;
+  }
+
+  &__card {
+    padding: $size-4;
+    border: 1px solid $color-outline;
+    border-radius: $corner-large;
+    background-color: $color-white;
+  }
+
+  &__title {
+    margin: 0 0 $size-2;
+    color: $color-on-primary;
+    font-size: $font-size-headline-medium;
+    font-weight: $font-weight-bold;
+  }
+
+  &__text {
+    margin: 0 0 $size-3;
+  }
+
+  &__note {
+    margin: $size-2 0 0;
+    color: $color-on-bg-low;
+    font-size: $font-size-label-large;
+  }
+}

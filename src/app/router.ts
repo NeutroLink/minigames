@@ -1,4 +1,5 @@
 import { clearElement } from './dom';
+import { currentPath, toHref } from './paths';
 import type { Route } from './routes';
 import { renderNotFound } from '../pages/not-found';
 
@@ -7,18 +8,24 @@ export class Router {
 
   private readonly routes: Route[];
 
-  constructor(outlet: HTMLElement, routes: Route[]) {
+  private readonly onChange: (path: string) => void;
+
+  constructor(outlet: HTMLElement, routes: Route[], onChange: (path: string) => void) {
     this.outlet = outlet;
     this.routes = routes;
+    this.onChange = onChange;
   }
 
   private renderCurrent(): void {
-    const route = this.routes.find((item) => item.path === location.pathname);
+    const path = currentPath();
+    const route = this.routes.find((item) => item.path === path);
 
     document.title = route === undefined ? 'MiniGames' : `MiniGames — ${route.title}`;
 
     clearElement(this.outlet);
     this.outlet.append(route === undefined ? renderNotFound() : route.render());
+    scrollTo({ top: 0 });
+    this.onChange(path);
   }
 
   public start(): void {
@@ -30,8 +37,8 @@ export class Router {
   }
 
   public navigate(path: string): void {
-    if (path !== location.pathname) {
-      history.pushState({}, '', path);
+    if (path !== currentPath()) {
+      history.pushState({}, '', toHref(path));
     }
 
     this.renderCurrent();

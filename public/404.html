@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MiniGames</title>
+    <script>
+      // GitHub Pages has no server-side rewrite: a direct hit on /minigames/library
+      // returns this file. Encode the requested path into the query string and hand
+      // control back to index.html, which decodes it before the router starts.
+      const path = location.pathname.replace(/^\/minigames/, '');
+      location.replace(
+        '/minigames/?redirect=' + encodeURIComponent(path + location.search + location.hash),
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
