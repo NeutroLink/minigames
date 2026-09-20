@@ -2,6 +2,9 @@ import { createElement } from '../app/dom';
 
 export type AuthMode = 'login' | 'register';
 
+// Matches the dialog transition duration in _overlays.scss.
+const CLOSE_DELAY_MS = 200;
+
 export interface AuthDialog {
   element: HTMLDialogElement;
   open: (mode?: AuthMode) => void;
@@ -110,6 +113,7 @@ function createForm(mode: AuthMode, onSwitch: (mode: AuthMode) => void): HTMLFor
 
 export function createAuthDialog(): AuthDialog {
   let mode: AuthMode = 'login';
+  let closeTimer: ReturnType<typeof setTimeout> | undefined;
 
   const element = createElement('dialog', { className: 'auth' });
 
@@ -166,12 +170,14 @@ export function createAuthDialog(): AuthDialog {
   function close(): void {
     element.classList.remove('is-open');
     document.body.classList.remove('is-locked');
-    setTimeout(() => {
+    closeTimer = setTimeout(() => {
       element.close();
-    }, 200);
+    }, CLOSE_DELAY_MS);
   }
 
   function open(next: AuthMode = 'login'): void {
+    // A reopen inside the closing window must not be shut by the pending timer.
+    clearTimeout(closeTimer);
     render(next);
     element.showModal();
     document.body.classList.add('is-locked');
