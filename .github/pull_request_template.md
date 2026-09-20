@@ -1,4 +1,3 @@
-```markdown
 ## Task
 
 <!-- Link to the task description -->
@@ -27,4 +26,3 @@ Score: X / Y
 
 - [ ] criterion (points)
 - [ ] criterion (points)
- ```
