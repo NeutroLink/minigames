@@ -2,15 +2,16 @@
 @use 'mixins' as *;
 
 // Measured from the Figma desktop frame: content sits 120px from each edge of the
-// 1920 frame; the header keeps a narrower 80px inset of its own.
+// 1920 frame. The mobile inset is applied with the same max-width edge the header
+// uses, so 768px resolves to one consistent set of rules.
 .container {
   width: 100%;
   max-width: $content-max-width;
   margin-inline: auto;
-  padding-inline: $size-2;
+  padding-inline: $size-4;
 
-  @include from('tablet') {
-    padding-inline: $size-4;
+  @include up-to('tablet') {
+    padding-inline: $size-2;
   }
 
   @include from('desktop') {
