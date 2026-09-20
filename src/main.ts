@@ -1,6 +1,8 @@
 import './styles/main.scss';
 import { renderApp } from './app/app';
-const root = document.querySelector<HTMLElement>('#app');
-if (root) {
-  renderApp(root);
-}
+import { createElement } from './app/dom';
+
+const root = createElement('div', { attributes: { id: 'app' } });
+
+document.body.append(root);
+renderApp(root);
