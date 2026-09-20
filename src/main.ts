@@ -1,2 +1,4 @@
 const app = document.querySelector('#app');
-app.textContent = 'MiniGames is running';
+if (app) {
+  app.textContent = 'MiniGames is running';
+}
