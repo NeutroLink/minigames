@@ -1,4 +1,5 @@
-const app = document.querySelector('#app');
-if (app) {
-  app.textContent = 'MiniGames is running';
+import { renderApp } from './app/app';
+const root = document.querySelector<HTMLElement>('#app');
+if (root) {
+  renderApp(root);
 }
